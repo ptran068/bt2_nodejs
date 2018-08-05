@@ -1,0 +1,14 @@
+{
+  "name": "router",
+  "version": "1.0.0",
+  "description": "",
+  "main": "1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "phong",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
