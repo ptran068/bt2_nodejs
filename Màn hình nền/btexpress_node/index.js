@@ -136,6 +136,12 @@ app.get('/users/search/regex/:name', async (req ,res) => {
                             return true
                             }
                     }
+                    if (eachLength===nameParaLength){
+                        let isInclueded= lowCaseEach.includes(lowCaseNamePara);
+                        if (isInclueded) {
+                            return true
+                            }
+                    }
                     return false
                 });
                 return res.json({message: 'done', data: filteredSource});
