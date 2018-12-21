@@ -127,22 +127,22 @@ app.get('/users/search/regex/:name', async (req ,res) => {
                     if (eachLength < nameParaLength){
                         let isInclueded = lowCaseNamePara.includes(lowCaseEach);
                             if (isInclueded) {
-                                return true;
+                                return false;
                         }
                     }
                     if (eachLength > nameParaLength) {
                         let isInclueded = lowCaseEach.includes(lowCaseNamePara);
                         if (isInclueded) {
-                            return true
+                            return true;
                         }
                     }
                     if (eachLength === nameParaLength) {
                         let isInclueded=  lowCaseEach.includes(lowCaseNamePara);
                         if (isInclueded) {
-                            return true
+                            return true;
                         }
                     }
-                    return false
+                    return false;
                 });
                 return res.json({message: 'done', data: filteredSource});
       } catch (e) {
@@ -151,99 +151,99 @@ app.get('/users/search/regex/:name', async (req ,res) => {
     
 })
 
-//get one user by id 
-// app.get('/read-file/:userId', async (req, res) => {
-//     try {
-// 		const users = await readFile('data');
-//         const userId = parseInt(req.params.userId);
-//         console.log(userId);
-// 		for (const item of users) {
-// 			if (item.id == userId) {
-// 				return res.status(200).json({ user: item });
-// 			}
-// 		}
-// 		return res.status(400).json({ message: 'User is not found' });
-// 	} catch (e) {
-// 		return res.status(400).json({ message: 'Cannot read user file', error: e.message });
-// 	}
-// });
+// get one user by id 
+app.get('/read-file/:userId', async (req, res) => {
+    try {
+		const users = await readFile('data');
+        const userId = parseInt(req.params.userId);
+        console.log(userId);
+		for (const item of users) {
+			if (item.id == userId) {
+				return res.status(200).json({ user: item });
+			}
+		}
+		return res.status(400).json({ message: 'User is not found' });
+	} catch (e) {
+		return res.status(400).json({ message: 'Cannot read user file', error: e.message });
+	}
+});
 // Update one user api
 
 // Create one user api
-// function createUser(id,email,pass,gender) {
-//     return new Promise((resolve, reject) => {
-//         const infor = {
-//             id,
-//             email,
-//             pass,
-//             gender
-//         };
-//         const end = users.push(infor);
-//         return resolve(end);
-//     })
-// }
+function createUser(id,email,pass,gender) {
+    return new Promise((resolve, reject) => {
+        const infor = {
+            id,
+            email,
+            pass,
+            gender
+        };
+        const end = users.push(infor);
+        return resolve(end);
+    })
+}
 
-// app.get('/create', async  (req, res) => {
-//       try {
-//         const read = await readFile('data');
-//         const users = await createUser(5,'phong','xxxx','male');
-//         await writeFile('data',users);
-//         console.log(users);
+app.get('/create', async  (req, res) => {
+      try {
+        const read = await readFile('data');
+        const users = await createUser(5,'phong','xxxx','male');
+        await writeFile('data',users);
+        console.log(users);
        
 
-//         return res.status(200).json({ user: 'sucess' });
-//       } catch (e) {
-//         return res.status(400).json({ message: 'Cannot read user file' });
-//       }
+        return res.status(200).json({ user: 'sucess' });
+      } catch (e) {
+        return res.status(400).json({ message: 'Cannot read user file' });
+      }
 
-// });
+});
 
 // Delete one user api
-// app.delete('/delete/:userId', async (req, res) => {
-//     try {
-// 		const users = await readFile('data');
-//         const userId = parseInt(req.params.userId);
+app.delete('/delete/:userId', async (req, res) => {
+    try {
+		const users = await readFile('data');
+        const userId = parseInt(req.params.userId);
         
-// 		for (const iteam of users) {
-//             let index = 0;
-//             if (iteam.id === userId) {
-//                 users.splice(index,1);
-//                 await writeFile('data',users);
-//                 return res.status(200).json({ user: 'Success' });
-//             }
-//             index++;     
-//         }
-//         return res.status(400).json({ message: 'Cannot read user file' });
+		for (const iteam of users) {
+            let index = 0;
+            if (iteam.id === userId) {
+                users.splice(index,1);
+                await writeFile('data',users);
+                return res.status(200).json({ user: 'Success' });
+            }
+            index++;     
+        }
+        return res.status(400).json({ message: 'Cannot read user file' });
         
-// 	} catch (e) {
-// 		return res.status(400).json({ message: 'Cannot read user file'});
-// 	}
-// });
+	} catch (e) {
+		return res.status(400).json({ message: 'Cannot read user file'});
+	}
+});
 
-// app.post('/check',async (req, res) => {
-//     try {
-//             const body = req.body;
-//             const user = await readFile('data');
-//             const info = {
-//                 id : parseInt(body.id),
-//                 email : body.email,
-//                 pass : body.pass,
-//                 gender : body.gender
-//             }
-//             for (const iteam of user) {
-//                 if (iteam.id === body.id) {
-//                     return res.status(400).json({message: 'êrrrr'});
-//                 }
-//             }
-//              user.push(info);
-//              await writeFile('data',user);
-//              return res.json({message : 'done'});
+app.post('/check',async (req, res) => {
+    try {
+            const body = req.body;
+            const user = await readFile('data');
+            const info = {
+                id : parseInt(body.id),
+                email : body.email,
+                pass : body.pass,
+                gender : body.gender
+            }
+            for (const iteam of user) {
+                if (iteam.id === body.id) {
+                    return res.status(400).json({message: 'êrrrr'});
+                }
+            }
+             user.push(info);
+             await writeFile('data',user);
+             return res.json({message : 'done'});
 
-//     } catch (e) {
-//         return res.status(400).json({message:'aa'});
-//     }
+    } catch (e) {
+        return res.status(400).json({message:'aa'});
+    }
     
     
-// });
+});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
