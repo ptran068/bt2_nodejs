@@ -124,23 +124,23 @@ app.get('/users/search/regex/:name', async (req ,res) => {
                 let filteredSource = source.filter(each => {
                     let eachLength = each.name.length;
                     let lowCaseEach = each.name.toLowerCase();
-                    if (eachLength<nameParaLength){
+                    if (eachLength < nameParaLength){
                         let isInclueded = lowCaseNamePara.includes(lowCaseEach);
                             if (isInclueded) {
                                 return true;
-                                }
+                        }
                     }
-                    if (eachLength>nameParaLength){
-                        let isInclueded= lowCaseEach.includes(lowCaseNamePara);
+                    if (eachLength > nameParaLength) {
+                        let isInclueded = lowCaseEach.includes(lowCaseNamePara);
                         if (isInclueded) {
                             return true
-                            }
+                        }
                     }
-                    if (eachLength===nameParaLength){
-                        let isInclueded= lowCaseEach.includes(lowCaseNamePara);
+                    if (eachLength === nameParaLength) {
+                        let isInclueded=  lowCaseEach.includes(lowCaseNamePara);
                         if (isInclueded) {
                             return true
-                            }
+                        }
                     }
                     return false
                 });
